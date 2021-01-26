@@ -108,3 +108,18 @@ function renderBrowseMovies(){
 //renderBrowseMovies()
 
 //****** Sign In ******//
+const loginForm = document.querySelector(".sign-in")
+const loginBtn = document.querySelector(".sign-in-button")
+const loginDiv = document.querySelector(".sign-in-div")
+
+function loginEvent() {
+    loginForm.addEventListener("submit", (e) => {
+        e.preventDefault()
+        const pName = document.createElement("p")
+        pName.innerText = e.target.username.value
+        
+        loginDiv.append(pName)
+    })
+}
+
+loginEvent()
