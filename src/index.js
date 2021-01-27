@@ -150,9 +150,10 @@ function getQueue() {
             if(contentObj.queue_list_id === 1) {
                 genArray.push(contentObj)
             }
-        })
-        for(let i= 0; i < genArray.length; i++) {
-        }
+        }) 
+        console.log(genArray[0].ownerships[0].user_id)
+        //for(let i= 0; i < genArray.length; i++) {
+        //}
 
         // genArray.forEach(contentObj => {
         //     let nameLi = document.createElement("li")
