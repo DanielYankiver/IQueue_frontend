@@ -1,3 +1,6 @@
+const genArray = [] 
+let userId = 1 
+
 //****** Queue-list ******//
 
 const queueList = document.querySelector(".queue-list")
@@ -20,7 +23,7 @@ function clickQueueListEvent() {
                     generalArray.push(content)
                 }
             })
-            console.log(generalArray)
+            getQueue(generalArray)
         })
       } 
       else if (e.target.className === "anime") {
@@ -33,7 +36,7 @@ function clickQueueListEvent() {
                       animeArray.push(content)
                   }
               })
-              console.log(animeArray)
+              getQueue(animeArray)
           })
       }
       else if (e.target.className === "fam") {
@@ -46,7 +49,7 @@ function clickQueueListEvent() {
                     famArray.push(content)
                 }
             })
-            console.log(famArray)
+            getQueue(famArray)
         })
       }
       else if (e.target.className === "date") {
@@ -59,7 +62,7 @@ function clickQueueListEvent() {
                     dateArray.push(content)
                 }
             })
-            console.log(dateArray)
+            getQueue(dateArray)
         })
       }
       else {
@@ -72,7 +75,7 @@ function clickQueueListEvent() {
                     laughArray.push(content)
                 }
             })
-            console.log(laughArray)
+            getQueue(laughArray)
         })   
       }
 
@@ -97,6 +100,7 @@ function renderBrowseMovies(){
             let imageLi = document.createElement("li")
             let image = document.createElement("img")
             image.src = content.image
+            image.dataset.id = content.id 
             imageLi.append(image)
             browseUl.append(imageLi)
         })
@@ -119,6 +123,12 @@ function loginEvent() {
         e.preventDefault()
         pName.innerText = e.target.username.value
         loginDiv.append(pName)
+        if (pName.innerText === "erwin") {
+            UserId = 1 
+        }
+        else {
+            UserId = 2 
+        }
     })
 }
 
@@ -139,36 +149,66 @@ const disneyBtn = document.querySelector(".disney")
 //*******Queue ******/
 
 const mainQueue = document.querySelector(".queue-display")
-const queueOl = document.createElement("ol")
+const queueUl = document.createElement("ul")
 
-function getQueue() {
-    fetch("http://localhost:3000/contents")
-    .then(res => res.json())
-    .then(contentArr => {
-        const genArray = [] 
-        contentArr.forEach(contentObj => {
-            if(contentObj.queue_list_id === 1) {
-                genArray.push(contentObj)
+//HELPER TO RENDER USER SPECIFIC QUEUE LIST
+function getQueue(queueArray) {
+    let myQueue = [] 
+    queueUl.innerHTML = ""
+    // fetch("http://localhost:3000/contents")
+    // .then(res => res.json())
+    // .then(contentArr => {
+    //     contentArr.forEach(contentObj => {
+    //         if(contentObj.queue_list_id === 1) {
+    //             genArray.push(contentObj)
+    //         } 
+        //console.log(genArray[0].ownerships[0].user_id)
+        //console.log(genArray[0].ownerships.length)
+        for (let i = 0; i < queueArray.length; i++) {
+            for (let j =0; j< queueArray[i].ownerships.length; j++) {
+                if(queueArray[i].ownerships[j].user_id === userId) {
+                    myQueue.push(queueArray[i])
+                }
             }
-        }) 
-        console.log(genArray[0].ownerships[0].user_id)
-        //for(let i= 0; i < genArray.length; i++) {
-        //}
+        }
+        myQueue.forEach(contentObj => {
+            let titleName = document.createElement("li")
+            titleName.dataset.id = contentObj.id 
+            titleName.innerText = contentObj.title
+            titleName.innerText +=  (" -----" + contentObj.platform)
+            queueUl.append(titleName)
+            mainQueue.append(queueUl)
+        })
+    }
 
-        // genArray.forEach(contentObj => {
-        //     let nameLi = document.createElement("li")
-        //     let platformLi = document.createElement("li")
-        //     nameLi.innerText = contentObj.title 
-        //     platformLi = contentObj.platform
-        //     queueOl.append(nameLi, platformLi)
-        //     mainQueue.append(queueOl)
-        // })
-
+//NEED FUNCTION EVENT LISTENER CLICK THAT WILL RENDER POSTER/RATING/INFO 
+function clickContentEvent() {
+    mainQueue.addEventListener("click", (e) => {
+        renderPoster(e.target.dataset.id)
     })
 }
 
+clickContentEvent()
 
+let poster = document.querySelector(".poster")
+let rating = document.querySelector(".rating")
 
-getQueue()
-//maybe invoke renderQueue after login submit event
+function renderPoster(contentId) {
+    fetch(`http://localhost:3000/contents/${contentId}`)
+    .then(res => res.json())
+    .then(contentObj => {
+        poster.innerHTML = ""
+        rating.innerHTML = ""
+        let posterImage = document.createElement("img")
+        let contentRating = document.createElement("p")
+        contentRating.textContent = contentObj.rating
+        rating.append(contentRating)
+        posterImage.src = contentObj.image 
+        poster.append(posterImage)
+    })
+}
+
+function renderInfo(){
+
+}
 
