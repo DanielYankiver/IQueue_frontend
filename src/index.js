@@ -111,15 +111,63 @@ function renderBrowseMovies(){
 const loginForm = document.querySelector(".sign-in")
 const loginBtn = document.querySelector(".sign-in-button")
 const loginDiv = document.querySelector(".sign-in-div")
+const pName = document.createElement("p")
+pName.innerText = "erwin"
 
 function loginEvent() {
     loginForm.addEventListener("submit", (e) => {
         e.preventDefault()
-        const pName = document.createElement("p")
         pName.innerText = e.target.username.value
-        
         loginDiv.append(pName)
     })
 }
 
 loginEvent()
+
+//********Platform buttons ******/
+// Netflix, Prime Video, HBO Max, Hulu, Crunchyroll, Disney+
+
+const platformSort = document.querySelector(".platform-sort")
+const netflixBtn = document.querySelector(".netflix")
+const primeBtn = document.querySelector(".prime")
+const hboBtn = document.querySelector(".hbo")
+const huluBtn = document.querySelector(".hulu")
+const crunchyBtn = document.querySelector(".crunchy")
+const disneyBtn = document.querySelector(".disney")
+
+
+//*******Queue ******/
+
+const mainQueue = document.querySelector(".queue-display")
+const queueOl = document.createElement("ol")
+
+function getQueue() {
+    fetch("http://localhost:3000/contents")
+    .then(res => res.json())
+    .then(contentArr => {
+        const genArray = [] 
+        contentArr.forEach(contentObj => {
+            if(contentObj.queue_list_id === 1) {
+                genArray.push(contentObj)
+            }
+        })
+        for(let i= 0; i < genArray.length; i++) {
+        }
+
+        // genArray.forEach(contentObj => {
+        //     let nameLi = document.createElement("li")
+        //     let platformLi = document.createElement("li")
+        //     nameLi.innerText = contentObj.title 
+        //     platformLi = contentObj.platform
+        //     queueOl.append(nameLi, platformLi)
+        //     mainQueue.append(queueOl)
+        // })
+
+    })
+}
+
+
+
+getQueue()
+//maybe invoke renderQueue after login submit event
+
