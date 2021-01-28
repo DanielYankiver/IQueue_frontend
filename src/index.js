@@ -113,27 +113,64 @@ function renderBrowseMovies(){
 //renderBrowseMovies()
 
 //****** Sign In ******//
-const loginForm = document.querySelector(".sign-in")
-const loginBtn = document.querySelector(".sign-in-button")
+// const loginForm = document.querySelector(".sign-in")
+// const loginBtn = document.querySelector(".sign-in-button")
+
 const loginDiv = document.querySelector(".sign-in-div")
 const pName = document.createElement("p")
 pName.innerText = "erwin"
 
-function loginEvent() {
-    loginForm.addEventListener("submit", (e) => {
+    // loginDiv.addEventListener("click", (e) => {
+    //     e.preventDefault()
+    //     if (e.target.name == "loginbutton") {
+    //         let div = e.target.closest("div")
+    //         console.log(div.signinarea.value)
+    //      }
+    //     // pName.innerText = e.target.username.value
+    //     // loginDiv.append(pName)
+    //     // if (pName.innerText === "erwin") {
+    //     //     UserId = 1 
+    //     // }
+    //     // else {
+    //     //     UserId = 2 
+    //     // }
+    // })
+
+
+function renderLogin(){
+    
+    let label = document.createElement("label")
+    label.name = "sign-in-header"
+    label.innerText = " Username: "
+    
+    let input1 = document.createElement("input")
+    input1.type = "text"
+    input1.name = "signIn"
+    input1.placeholder = "Enter username"
+    
+    let loginButton = document.createElement("text")
+    loginButton.name = "login"
+    loginButton.innerText = "Login"
+    
+    loginDiv.append(label, input1, loginButton)
+
+    loginDiv.addEventListener("click", (e) => {
         e.preventDefault()
-        pName.innerText = e.target.username.value
-        loginDiv.append(pName)
-        if (pName.innerText === "erwin") {
-            UserId = 1 
-        }
-        else {
-            UserId = 2 
-        }
+        if (e.target.name === "login") {
+            console.log(e.target)
+         }
+        // pName.innerText = e.target.username.value
+        // loginDiv.append(pName)
+        // if (pName.innerText === "erwin") {
+        //     UserId = 1 
+        // }
+        // else {
+        //     UserId = 2 
+        // }
     })
 }
+renderLogin()
 
-loginEvent()
 
 //********Platform buttons ******/
 // Netflix, Prime Video, HBO Max, Hulu, Crunchyroll, Disney+
