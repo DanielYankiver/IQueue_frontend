@@ -1,23 +1,6 @@
 let genArray = [] 
 let userId = 1
 
-//****** FUNCTION INVOCATIONS *****//
-
-clickQueueListEvent()
-
-//renderBrowseMovies()
-
-renderLogin()
-clickContentEvent()
-
-addToQueue()
-
-//****** Update Review *****//
-updateEvent()
-
-//***** Deleting a Movie from a Queue *****//
-delEvent()
-
 
 
 //****** Queue-list Buttons ******//
@@ -28,12 +11,13 @@ let animeBtn = document.querySelector(".anime")
 let famBtn = document.querySelector(".fam")
 let dateBtn = document.querySelector(".date")
 let laughBtn = document.querySelector(".laugh")
-
+//let qHeader = document.querySelector(".myQueue")
 
 //****** BUTTON FUNCTIONALITY ******//
 function clickQueueListEvent() {
     queueList.addEventListener("click", (e) => {
       if (e.target.className === "gen") {
+        //  qHeader.textContent = "General Queue"
         fetch("http://localhost:3000/contents")
         .then(res => res.json())
         .then(contentArr => {
@@ -47,6 +31,7 @@ function clickQueueListEvent() {
         })
       } 
       else if (e.target.className === "anime") {
+        //  qHeader.textContent ="Animation Queue"
           fetch("http://localhost:3000/contents")
           .then(res => res.json())
           .then(contentArr => {
@@ -60,6 +45,7 @@ function clickQueueListEvent() {
           })
       }
       else if (e.target.className === "fam") {
+         // qHeaders.textContent = "Family Queue"
         fetch("http://localhost:3000/contents")
         .then(res => res.json())
         .then(contentArr => {
@@ -73,6 +59,7 @@ function clickQueueListEvent() {
         })
       }
       else if (e.target.className === "date") {
+         // qHeader.textContent = "Date Night Queue"
         fetch("http://localhost:3000/contents")
         .then(res => res.json())
         .then(contentArr => {
@@ -85,7 +72,8 @@ function clickQueueListEvent() {
             getQueue(dateArray)
         })
       }
-      else {
+      else if(e.target.className ==="laugh") {
+          //qHeaders.textContent = "Laugh Queue"
         fetch("http://localhost:3000/contents")
         .then(res => res.json())
         .then(contentArr => {
@@ -98,8 +86,13 @@ function clickQueueListEvent() {
             getQueue(laughArray)
         })   
       } 
+      else {
+          alert("Please click on a queue list button!")
+      }
     })
 }
+
+clickQueueListEvent()
 
 //****** Browse Movies By Scroll ******//
 
@@ -114,14 +107,25 @@ function renderBrowseMovies(){
         contentArr.forEach(content => {
             let imageLi = document.createElement("li")
             let image = document.createElement("img")
+            //let movieCard = document.createElement("div")
             image.src = content.image
+            image.className = "carousel"
+            image.style.maxWidth = "170px"
+            image.style.maxHeight = "230px"
             image.alt = "Content ID #" + content.id 
             image.dataset.id = content.id 
             imageLi.append(image)
-            browseUl.append(imageLi)
-        })
+            browseUl.append(image)
+
+            image.addEventListener("click", (e) => {
+                alert(`${e.target.alt}`) 
+            })
     })
+})
 }
+
+
+renderBrowseMovies()
 
 //****** Sign In ******//
 
@@ -144,9 +148,15 @@ function renderLogin(){
                 loginDiv.append(pName)
                 userId = 2 
             }
+            else {
+                alert("Incorrect username, defaulting you to our current user as we are too poor for security!")
+                userId = 1 
+            }
         }
     })          
 }
+
+renderLogin()
 
 
 //*******Queue ******/
@@ -165,9 +175,16 @@ function getQueue(queueArray) {
             }
         }
         myQueue.forEach(contentObj => {
-            let titleName = document.createElement("li")
+            let titleName = document.createElement("p")
             titleName.dataset.id = contentObj.id 
+            titleName.className = "titleName"
             titleName.innerText = contentObj.title
+            if (contentObj.platform == "Netflix") {
+                let platformImg = document.createElement("img")
+                img.src = NETFLLIX PHOTO
+                SIZE THE FUCKIN PHOTO YEEE
+                
+            }
             titleName.innerText +=  (" -----" + contentObj.platform)
             queueUl.append(titleName)
             mainQueue.append(queueUl)
@@ -185,11 +202,18 @@ let reviewDiv = document.querySelector(".reviews")
 
 function clickContentEvent() {
     mainQueue.addEventListener("click", (e) => {
+        if(e.target.className == "titleName"){
+
         renderPoster(e.target.dataset.id)
         renderInfo(e.target.dataset.id)
-        renderReview(e.target.dataset.id)
+        renderReview(e.target.dataset.id) }
+        else {
+            alert("Please click on a title!")
+        }
     })
 }
+
+clickContentEvent()
 
 //POSTER AND RATING HELPER
 
@@ -201,11 +225,24 @@ function renderPoster(contentId) {
         rating.innerHTML = ""
         let posterImage = document.createElement("img")
         let contentRating = document.createElement("p")
-        contentRating.textContent = contentObj.rating
+        // posterImage.style.maxWidth = "300px"
+        // posterImage.style.maxHeight = "420px"
+        //RATING ABOVE 90
+        //RATING 80-90
+        //RATING BELOW 80
+        if (contentObj.rating >= 90) {
+        contentRating.textContent = ("🔥🔥🔥" + contentObj.rating + "%")
+    }
+    else if (contentObj.rating < 90 && contentObj.rating >= 80) {
+        contentRating.textContent = ("🔥🔥" + contentObj.rating + "%")
+    }
+    else {
+        contentRating.textContent = ("🔥" + contentObj.rating + "%")
+    }
         rating.append(contentRating)
         posterImage.src = contentObj.image 
         poster.append(posterImage)
-    })
+    }) 
 }
 
 //INFO HELPER
@@ -215,19 +252,19 @@ function renderInfo(contentId){
     .then(res => res.json())
     .then(contentObj => {
         info.innerHTML = ""
-        let titleLi = document.createElement("li")
-        let yearLi = document.createElement("li")
-        let platformLi = document.createElement("li")
-        let descriptionLi = document.createElement("li")
-        let categoryLi = document.createElement("li")
-        let idNum = document.createElement("li")
+        let titleLi = document.createElement("p")
+        let yearLi = document.createElement("p")
+        let platformLi = document.createElement("p")
+        let descriptionLi = document.createElement("p")
+        let categoryLi = document.createElement("p")
+        let idNum = document.createElement("p")
         let lineBreaker = document.createElement("br")
-        titleLi.innerText = contentObj.title 
-        yearLi.textContent = contentObj.year 
-        platformLi.innerText = contentObj.platform
-        descriptionLi.innerText = contentObj.description 
-        categoryLi.innerText = contentObj.category 
-        idNum.textContent = "Content ID #" + contentObj.id
+        titleLi.innerText = ("TITLE: " + contentObj.title) 
+        yearLi.textContent = ("RELEASE DATE: " + contentObj.year) 
+        platformLi.innerText =("STREAMING PLATFORM: " + contentObj.platform)
+        descriptionLi.innerText = ("DESCRIPTION: " + contentObj.description) 
+        categoryLi.innerText = ("TYPE: " + contentObj.category) 
+        idNum.textContent = "CONTENT ID #" + contentObj.id
         titleLi.append(lineBreaker)
         yearLi.append(lineBreaker)
         platformLi.append(lineBreaker)
@@ -374,6 +411,8 @@ function addToQueue() {
     addQueueForm.append(label, input1, input2, breaker, AddQueueButton) 
 }
 
+addToQueue()
+
 
 addQueueForm.addEventListener("submit", (e) => {
     e.preventDefault() 
@@ -400,5 +439,8 @@ addQueueForm.addEventListener("submit", (e) => {
     })
     e.target.reset()
 } ) 
+
+updateEvent()
+delEvent()
 
 
