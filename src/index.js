@@ -1,16 +1,36 @@
-const genArray = [] 
+let genArray = [] 
 let userId = 1
 
-//****** Queue-list ******//
+//****** FUNCTION INVOCATIONS *****//
 
-const queueList = document.querySelector(".queue-list")
-const generalBtn = document.querySelector(".gen")
-const animeBtn = document.querySelector(".anime")
-const famBtn = document.querySelector(".fam")
-const dateBtn = document.querySelector(".date")
-const laughBtn = document.querySelector(".laugh")
+clickQueueListEvent()
 
-// FUNCTION FOR ALL 5 BUTTONS
+//renderBrowseMovies()
+
+renderLogin()
+clickContentEvent()
+
+addToQueue()
+
+//****** Update Review *****//
+updateEvent()
+
+//***** Deleting a Movie from a Queue *****//
+delEvent()
+
+
+
+//****** Queue-list Buttons ******//
+
+let queueList = document.querySelector(".queue-list")
+let generalBtn = document.querySelector(".gen")
+let animeBtn = document.querySelector(".anime")
+let famBtn = document.querySelector(".fam")
+let dateBtn = document.querySelector(".date")
+let laughBtn = document.querySelector(".laugh")
+
+
+//****** BUTTON FUNCTIONALITY ******//
 function clickQueueListEvent() {
     queueList.addEventListener("click", (e) => {
       if (e.target.className === "gen") {
@@ -77,19 +97,14 @@ function clickQueueListEvent() {
             })
             getQueue(laughArray)
         })   
-      }
-
-      
+      } 
     })
 }
 
-clickQueueListEvent()
-
-
 //****** Browse Movies By Scroll ******//
 
-const browseMovies = document.querySelector(".movie-browse")
-const browseUl = document.querySelector(".browse")
+let browseMovies = document.querySelector(".movie-browse")
+let browseUl = document.querySelector(".browse")
 
 function renderBrowseMovies(){
 
@@ -106,102 +121,42 @@ function renderBrowseMovies(){
             browseUl.append(imageLi)
         })
     })
-
 }
-//need to fix YourName, change seed later
-
-//renderBrowseMovies()
 
 //****** Sign In ******//
-// const loginForm = document.querySelector(".sign-in")
-// const loginBtn = document.querySelector(".sign-in-button")
 
-const loginDiv = document.querySelector(".sign-in-div")
-const pName = document.createElement("p")
+
+let loginDiv = document.querySelector(".sign-in-div")
+let pName = document.createElement("p")
 pName.innerText = "erwin"
 
-    // loginDiv.addEventListener("click", (e) => {
-    //     e.preventDefault()
-    //     if (e.target.name == "loginbutton") {
-    //         let div = e.target.closest("div")
-    //         console.log(div.signinarea.value)
-    //      }
-    //     // pName.innerText = e.target.username.value
-    //     // loginDiv.append(pName)
-    //     // if (pName.innerText === "erwin") {
-    //     //     UserId = 1 
-    //     // }
-    //     // else {
-    //     //     UserId = 2 
-    //     // }
-    // })
-
-
 function renderLogin(){
-    
-    let label = document.createElement("label")
-    label.name = "sign-in-header"
-    label.innerText = " Username: "
-    
-    let input1 = document.createElement("input")
-    input1.type = "text"
-    input1.name = "signIn"
-    input1.placeholder = "Enter username"
-    
-    let loginButton = document.createElement("text")
-    loginButton.name = "login"
-    loginButton.innerText = "Login"
-    
-    loginDiv.append(label, input1, loginButton)
-
-    loginDiv.addEventListener("click", (e) => {
-        e.preventDefault()
-        if (e.target.name === "login") {
-            console.log(e.target)
-         }
-        // pName.innerText = e.target.username.value
-        // loginDiv.append(pName)
-        // if (pName.innerText === "erwin") {
-        //     UserId = 1 
-        // }
-        // else {
-        //     UserId = 2 
-        // }
-    })
+    loginDiv.addEventListener("submit", event => {
+        event.preventDefault()
+        let lgnBtn = document.querySelector(".login-button")
+        if(lgnBtn.value === "Login") {
+            if(event.target.username.value.toLowerCase() == "erwin") {
+                loginDiv.append(pName)
+                userId = 1 
+            }
+            else if (event.target.username.value.toLowerCase() == "daniel") {
+                pName.innerText = "daniel"
+                loginDiv.append(pName)
+                userId = 2 
+            }
+        }
+    })          
 }
-renderLogin()
-
-
-//********Platform buttons ******/
-// Netflix, Prime Video, HBO Max, Hulu, Crunchyroll, Disney+
-
-// const platformSort = document.querySelector(".platform-sort")
-// const netflixBtn = document.querySelector(".netflix")
-// const primeBtn = document.querySelector(".prime")
-// const hboBtn = document.querySelector(".hbo")
-// const huluBtn = document.querySelector(".hulu")
-// const crunchyBtn = document.querySelector(".crunchy")
-// const disneyBtn = document.querySelector(".disney")
 
 
 //*******Queue ******/
-
 const mainQueue = document.querySelector(".queue-display")
 const queueUl = document.createElement("ul")
 
-//HELPER TO RENDER USER SPECIFIC QUEUE LIST
+//HELPER FUNCTION TO GET SPECIFIC QUEUE ON THE BUTTON CLICKS
 function getQueue(queueArray) {
     let myQueue = [] 
     queueUl.innerHTML = ""
-    // fetch("http://localhost:3000/contents")
-    // .then(res => res.json())
-    // .then(contentArr => {
-    //     contentArr.forEach(contentObj => {
-    //         if(contentObj.queue_list_id === 1) {
-    //             genArray.push(contentObj)
-    //         } 
-        //console.log(genArray[0].ownerships[0].user_id)
-        //console.log(genArray[0].ownerships.length)
         for (let i = 0; i < queueArray.length; i++) {
             for (let j =0; j< queueArray[i].ownerships.length; j++) {
                 if(queueArray[i].ownerships[j].user_id === userId) {
@@ -218,8 +173,16 @@ function getQueue(queueArray) {
             mainQueue.append(queueUl)
         })
     }
+    
+//CLICKING ON MOVIE lis that will call on render helpers
 
-//NEED FUNCTION EVENT LISTENER CLICK THAT WILL RENDER POSTER/RATING/INFO 
+let poster = document.querySelector(".poster")
+let rating = document.querySelector(".rating")
+let info = document.querySelector(".content-info")
+let reviewUl = document.querySelector(".display-reviews")
+let reviewDiv = document.querySelector(".reviews")
+
+
 function clickContentEvent() {
     mainQueue.addEventListener("click", (e) => {
         renderPoster(e.target.dataset.id)
@@ -228,13 +191,7 @@ function clickContentEvent() {
     })
 }
 
-clickContentEvent()
-//bottom half stuff
-let poster = document.querySelector(".poster")
-let rating = document.querySelector(".rating")
-let info = document.querySelector(".content-info")
-let reviewUl = document.querySelector(".display-reviews")
-let reviewDiv = document.querySelector(".reviews")
+//POSTER AND RATING HELPER
 
 function renderPoster(contentId) {
     fetch(`http://localhost:3000/contents/${contentId}`)
@@ -250,6 +207,8 @@ function renderPoster(contentId) {
         poster.append(posterImage)
     })
 }
+
+//INFO HELPER
 
 function renderInfo(contentId){
     fetch(`http://localhost:3000/contents/${contentId}`)
@@ -277,8 +236,9 @@ function renderInfo(contentId){
         idNum.append(lineBreaker)
         info.append(titleLi, yearLi, platformLi, categoryLi, descriptionLi, idNum)
     })
-
 }
+
+//REVIEW HELPER
 
 function renderReview(contentId) {
     let myReviews = []
@@ -306,23 +266,22 @@ function renderReview(contentId) {
                 reviewLi.append(editButton, deleteButton)
                 reviewUl.append(reviewLi)
              }
+        })
+    })
+}
 
-        })
-       
-        })
-    }
+//PATCH STUFF, this is cool bc we generate a form on edit click
+
+let editForm = document.querySelector(".edit-form")
 
 function updateEvent()  {
     reviewDiv.addEventListener("click", (e) => {
         if (e.target.className == "edit") {
             updateReview(e.target.dataset.id)
         }
-
     })
-
 }
 
-let editForm = document.querySelector(".edit-form")
 
 function updateReview (contentId) {
     editForm.innerHTML = ""
@@ -362,15 +321,15 @@ function updateReview (contentId) {
     })
 }
 
+//DELETE STUFF
+
 function delEvent() {
     reviewDiv.addEventListener("click", (e) => {
         e.preventDefault()
         if (e.target.className == "delete") {
             deleteReview(e.target.dataset.id)
         }
-
-    })
-    
+    })   
 }
 
 
@@ -384,9 +343,8 @@ function deleteReview(contentId) {
        })
 }
 
-updateEvent()
-delEvent()
 
+//POST STUFF and add to queue form
 
 let addQueueForm = document.querySelector(".queue-form") 
 
@@ -414,9 +372,8 @@ function addToQueue() {
     AddQueueButton.className = "add"
 
     addQueueForm.append(label, input1, input2, breaker, AddQueueButton) 
-
 }
-addToQueue()
+
 
 addQueueForm.addEventListener("submit", (e) => {
     e.preventDefault() 
@@ -442,7 +399,6 @@ addQueueForm.addEventListener("submit", (e) => {
         console.log("Added successfully!")
     })
     e.target.reset()
-
 } ) 
 
 

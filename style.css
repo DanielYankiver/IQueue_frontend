@@ -1,0 +1,36 @@
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr .2fr;
+  gap: 0px 0px;
+}
+
+.top { grid-area: 1 / 1 / 2 / 5; }
+
+.queue-list { grid-area: 1 / 1 / 2 / 2; }
+
+.movie-browse { grid-area: 1 / 2 / 2 / 4; }
+
+.sign-in-div { grid-area: 1 / 4 / 2 / 5; }
+
+.poster { grid-area: 2 / 2 / 4 / 3; }
+
+.content-info { grid-area: 2 / 3 / 4 / 4; }
+
+.queue-form { grid-area: 2 / 4 / 3 / 5; }
+
+.reviews { grid-area: 3 / 4 / 4 / 5; }
+
+.bottom { grid-area: 2 / 1 / 4 / 5; }
+
+.rating { grid-area: 4 / 2 / 5 / 3; }
+
+.queue-display { grid-area: 2 / 1 / 4 / 2; }
+
+
+  
+  
+  
+  
+
+  

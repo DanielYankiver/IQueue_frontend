@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width", initial-scale=1.0">
     <title>IQueue</title>
     <!-- <link href=""> for google fonts -->
-    <link rel="stylesheet" type="text/css" href="./styles/main.css">
+    <link rel="stylesheet" href="style.css">
     <script defer type="text/javascript" src="src/index.js"></script>
 </head>
 
 <body>
-    <div class="top">
-
+    <div class="grid-container">
+        <div class="top"></div>
         <div class="queue-list">
             <button class="gen">General</button>
             <button class="anime">Animation</button>
@@ -27,61 +27,56 @@
         </div>
 
         <div class="sign-in-div">
+            <form class="login">
+                <label for="username">Username:</label><br>
+                <input type="text" id="username" name="username"><br>
+                <input class="login-button" type="submit" value="Login">
+            </form>
         </div>
 
+        <div class="bottom"></div>
+            <!-- <div class="platform-sort">
+                <button class="netflix">Netflix</button>
+                <button class="prime">Prime Video</button>
+                <button class="hbo">HBO Max</button>
+                <button class="hulu">Hulu</button>
+                <button class="crunchy">Crunchyroll</button>
+                <button class="disney">Disney+</button>
+            </div> -->
+
+            <div class="queue-display">
+                <h3>Queue</h3>
+
+            </div>
+            
+            <div class="poster">
+                <h3>Poster</h3>
+
+            </div>
+
+            <div class="rating">
+                <h3>Rating</h3>
+
+            </div>
+
+            <form class="queue-form">
+                <h3>Add To My Queue </h3>
+                
+            </form>
+
+            <div class="content-info">
+                <h3>Movie Info</h3>
+
+            </div>
+
+            <div class="reviews">
+                <h3>Reviews</h3>
+                <ul class="display-reviews"></ul>
+                <form class="edit-form"></form>
+                <br>
+            </div>
         
-    
-
     </div>
-
-    <br>    <br>
-
-    <div class="bottom">
-        <!-- <div class="platform-sort">
-            <button class="netflix">Netflix</button>
-            <button class="prime">Prime Video</button>
-            <button class="hbo">HBO Max</button>
-            <button class="hulu">Hulu</button>
-            <button class="crunchy">Crunchyroll</button>
-            <button class="disney">Disney+</button>
-        </div> -->
-
-        <h3>Queue</h3>
-        <div class="queue-display">
-
-        </div>
-        
-        <h3>Poster</h3>
-        <div class="poster">
-
-        </div>
-
-        <h3>Rating</h3>
-        <div class="rating">
-
-        </div>
-
-        <h3>Add To My Queue </h3>
-        <form class="queue-form">
-             
-        </form>
-
-        <h3>Movie Info</h3>
-        <div class="content-info">
-
-        </div>
-
-        <h3>Reviews</h3>
-        <div class="reviews">
-            <ul class="display-reviews"></ul>
-            <form class="edit-form"></form>
-            <br>
-        </div>
-
-   
-
-    </div>
-
 </body>
 
 </html>
