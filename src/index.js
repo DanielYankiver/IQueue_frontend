@@ -1,5 +1,5 @@
 const genArray = [] 
-let userId = 1 
+let userId = 1
 
 //****** Queue-list ******//
 
@@ -100,6 +100,7 @@ function renderBrowseMovies(){
             let imageLi = document.createElement("li")
             let image = document.createElement("img")
             image.src = content.image
+            image.alt = "Content ID #" + content.id 
             image.dataset.id = content.id 
             imageLi.append(image)
             browseUl.append(imageLi)
@@ -137,13 +138,13 @@ loginEvent()
 //********Platform buttons ******/
 // Netflix, Prime Video, HBO Max, Hulu, Crunchyroll, Disney+
 
-const platformSort = document.querySelector(".platform-sort")
-const netflixBtn = document.querySelector(".netflix")
-const primeBtn = document.querySelector(".prime")
-const hboBtn = document.querySelector(".hbo")
-const huluBtn = document.querySelector(".hulu")
-const crunchyBtn = document.querySelector(".crunchy")
-const disneyBtn = document.querySelector(".disney")
+// const platformSort = document.querySelector(".platform-sort")
+// const netflixBtn = document.querySelector(".netflix")
+// const primeBtn = document.querySelector(".prime")
+// const hboBtn = document.querySelector(".hbo")
+// const huluBtn = document.querySelector(".hulu")
+// const crunchyBtn = document.querySelector(".crunchy")
+// const disneyBtn = document.querySelector(".disney")
 
 
 //*******Queue ******/
@@ -185,13 +186,18 @@ function getQueue(queueArray) {
 function clickContentEvent() {
     mainQueue.addEventListener("click", (e) => {
         renderPoster(e.target.dataset.id)
+        renderInfo(e.target.dataset.id)
+        renderReview(e.target.dataset.id)
     })
 }
 
 clickContentEvent()
-
+//bottom half stuff
 let poster = document.querySelector(".poster")
 let rating = document.querySelector(".rating")
+let info = document.querySelector(".content-info")
+let reviewUl = document.querySelector(".display-reviews")
+let reviewDiv = document.querySelector(".reviews")
 
 function renderPoster(contentId) {
     fetch(`http://localhost:3000/contents/${contentId}`)
@@ -208,7 +214,198 @@ function renderPoster(contentId) {
     })
 }
 
-function renderInfo(){
+function renderInfo(contentId){
+    fetch(`http://localhost:3000/contents/${contentId}`)
+    .then(res => res.json())
+    .then(contentObj => {
+        info.innerHTML = ""
+        let titleLi = document.createElement("li")
+        let yearLi = document.createElement("li")
+        let platformLi = document.createElement("li")
+        let descriptionLi = document.createElement("li")
+        let categoryLi = document.createElement("li")
+        let idNum = document.createElement("li")
+        let lineBreaker = document.createElement("br")
+        titleLi.innerText = contentObj.title 
+        yearLi.textContent = contentObj.year 
+        platformLi.innerText = contentObj.platform
+        descriptionLi.innerText = contentObj.description 
+        categoryLi.innerText = contentObj.category 
+        idNum.textContent = "Content ID #" + contentObj.id
+        titleLi.append(lineBreaker)
+        yearLi.append(lineBreaker)
+        platformLi.append(lineBreaker)
+        descriptionLi.append(lineBreaker)
+        categoryLi.append(lineBreaker)
+        idNum.append(lineBreaker)
+        info.append(titleLi, yearLi, platformLi, categoryLi, descriptionLi, idNum)
+    })
 
 }
+
+function renderReview(contentId) {
+    let myReviews = []
+    fetch(`http://localhost:3000/contents/${contentId}`)
+    .then(res => res.json())
+    .then(contentObj => {
+        reviewUl.innerHTML = ""
+        myOwnerships = []
+        myOwnerships = contentObj.ownerships
+        myOwnerships.forEach(ownerObj => {
+            if(ownerObj.content_id == contentId) {
+                myReviews.push(ownerObj)
+                let reviewLi = document.createElement("li")
+                reviewLi.innerText = ownerObj.review
+                reviewLi.dataset.id = ownerObj.id 
+                let deleteButton = document.createElement("button")
+                let editButton = document.createElement("button")
+                let lineBreak = document.createElement("br")
+                deleteButton.innerText = "Delete"
+                deleteButton.dataset.id = reviewLi.dataset.id 
+                deleteButton.className = "delete"
+                editButton.innerText = "Edit"
+                editButton.dataset.id = reviewLi.dataset.id
+                editButton.className = "edit"
+                reviewLi.append(editButton, deleteButton)
+                reviewUl.append(reviewLi)
+             }
+
+        })
+       
+        })
+    }
+
+function updateEvent()  {
+    reviewDiv.addEventListener("click", (e) => {
+        if (e.target.className == "edit") {
+            updateReview(e.target.dataset.id)
+        }
+
+    })
+
+}
+
+let editForm = document.querySelector(".edit-form")
+
+function updateReview (contentId) {
+    editForm.innerHTML = ""
+    let label = document.createElement("label")
+    label.name = "update-review"
+    label.textContent = "Update Your Review"
+
+    let input1 = document.createElement("input")
+    input1.type = "text"
+    input1.name = "review"
+    input1.placeholder = "Update Your Review Here"
+
+    let input2 = document.createElement("input")
+    input2.type = "submit"
+    input2.value = "Submit Update"
+    
+    editForm.append(label, input1, input2)
+
+    editForm.addEventListener("submit", (e) => {
+        e.preventDefault() 
+        let newReview = e.target.review.value 
+        fetch(`http://localhost:3000/ownerships/${contentId}`, {
+            method: 'PATCH', 
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify( {
+                review: newReview
+            }),
+        })
+        .then(res => res.json())
+        .then(ownerObj => {
+            renderReview(contentId)
+        })
+       e.target.reset()
+
+    })
+}
+
+function delEvent() {
+    reviewDiv.addEventListener("click", (e) => {
+        e.preventDefault()
+        if (e.target.className == "delete") {
+            deleteReview(e.target.dataset.id)
+        }
+
+    })
+    
+}
+
+
+function deleteReview(contentId) {
+   fetch(`http://localhost:3000/ownerships/${contentId}`, {
+       method: 'DELETE', 
+    }) 
+       .then(res => res.json())
+       .then(data => {
+        renderReview(contentId)
+       })
+}
+
+updateEvent()
+delEvent()
+
+
+let addQueueForm = document.querySelector(".queue-form") 
+
+function addToQueue() {
+    addQueueForm.innerHTML = ""
+    
+    let label = document.createElement("label")
+    label.name = "add-to-queue"
+    label.textContent = "What Do You Want Add?"
+
+    let input1 = document.createElement("input")
+    input1.type = "text"
+    input1.name = "contentID"
+    input1.placeholder = "Add the ID# of the Content You want to Add"
+
+    let input2 = document.createElement("input")
+    input2.type = "text"
+    input2.name = "review"
+    input2.placeholder = "Write Your Review Here"
+
+    let breaker = document.createElement("br")
+
+    let AddQueueButton = document.createElement("button")
+    AddQueueButton.innerText = "Add to Queue"
+    AddQueueButton.className = "add"
+
+    addQueueForm.append(label, input1, input2, breaker, AddQueueButton) 
+
+}
+addToQueue()
+
+addQueueForm.addEventListener("submit", (e) => {
+    e.preventDefault() 
+
+    let newOwnershipObj = {
+        review: e.target.review.value,
+        user_id: userId,
+        content_id: e.target.contentID.value
+    }
+    
+    console.log(e.target.contentID.value)
+    console.log(e.target.review.value) 
+
+    fetch("http://localhost:3000/ownerships", {
+        method: "POST",
+        headers: {
+            "Content-Type" : "application/json" 
+        }, 
+        body: JSON.stringify(newOwnershipObj)
+    })
+    .then(res => res.json())
+    .then(newObj => {
+        console.log("Added successfully!")
+    })
+    e.target.reset()
+
+} ) 
+
 
