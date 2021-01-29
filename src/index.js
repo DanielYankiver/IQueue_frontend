@@ -128,12 +128,13 @@ function renderBrowseMovies(){
 renderBrowseMovies()
 
 let editForm = document.querySelector(".edit-form")
+console.log(editForm)
 editForm.addEventListener("submit", (e) => {
     e.preventDefault()
-   
+    debugger 
     let editButton = document.querySelector(".update-button")
     if(editButton.value == "Update Review") {
-        let newContentId = parseInt((e.target.contentId.value))
+        let newContentId = (e.target.contentId.value)
         let newReview = (e.target.reviewupdate.value)
         let newReviewObj = {
             id: newContentId,
@@ -148,8 +149,7 @@ editForm.addEventListener("submit", (e) => {
         })
         .then( res => res.json())
         .then( data => {
-            console.log(data)
-            //renderReview(newContentId)
+            renderReview(newContentId)
         })
         e.target.reset()
     }

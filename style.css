@@ -5,18 +5,18 @@
   background-size: 1500px 1300px, cover;;
 }
 
-#top {
+.top {
   /* background-color: rgb(37, 37, 37); */
   color: rgb(185, 1, 1);
 
 }
 
-#middle {
+.middle {
   /* background-color: rgb(63, 29, 63); */
 
 }
 
-#bottom {
+.bottom {
   /* background-image: linear-gradient(to right, aqua, yellow); */
   color: rgb(247, 228, 228);;
 
@@ -74,11 +74,13 @@ button {
   border-width: 3px;
   text-align: center;
   cursor: pointer;
-  margin: auto;
 
   display: flex;
   align-items: baseline; 
 
+}
+#queue-buttons {
+  margin: auto;
 }
 
 .login-button { 
@@ -262,6 +264,7 @@ button {
   /* padding-top: 100px; */
   margin: auto;
   padding-left: 90px;
+  padding-top: 100px;
   /* padding-right: 50px; */
 
   color: rgb(247, 228, 228);
@@ -270,6 +273,16 @@ button {
 
 .reviews p {
   font-size: 10px;
+}
+
+.edit-form {
+  grid-area: 2 / 4 / 3 / 5; 
+
+  /* justify-content: right; 
+  align-items: right;  */
+
+  /* margin: auto; */
+  padding-left: 110px;
 }
 
 

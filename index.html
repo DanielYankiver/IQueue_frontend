@@ -14,15 +14,15 @@
 
         <div class="top"></div>
 
-        <div id="top" class = "logo">
+        <div class="top logo">
             <h4 class=logo-iQ>iQueue</h4>
         </div>
         
-        <div id="top" class="click-to-see-id">
+        <div class="top click-to-see-id">
             <h3>Click Poster Below to see its Content ID#</h3>
         </div>
 
-        <div id="top" class="sign-in-div">
+        <div class="top sign-in-div">
             <div class="sign-in-div-card">
                 <form class="login">
                     <label for="username">Username:</label><br>
@@ -32,11 +32,18 @@
             </div>
         </div>
 
+        <form class="edit-form">
+            <label for="update-review">Change Your Review:</label><br>
+            <input type="text" id="contentId" name="contentId" placeholder="ID# of Content"><br>
+            <input type="text" id="reviewupdate" name="reviewupdate" placeholder="Change Your Review"><br>
+            <input class="update-button" type="submit" value="Update Review">
+        </form>
+
            
 
         
         
-        <div id="middle" class="queue-list">
+        <div class="middle queue-list">
             <div class="queue-button-card">
                 <br>
                 <br>
@@ -52,7 +59,7 @@
             </div>
         </div>
 
-        <div id="middle" class="movie-browse">
+        <div class="middle movie-browse">
             <!-- <h3>Click a Poster for it's Content ID#</h3> -->
             <div class="movie-browse-card"> 
                 <ul class="browse">
@@ -71,33 +78,28 @@
                 <button class="disney">Disney+</button>
             </div> -->
 
-            <div id="bottom" class="queue-display">
+            <div class="bottom queue-display">
                     <h3 class="myQueue">myQueue</h3>
             </div>
             
-            <div id="bottom" class="poster">
+            <div class="bottom poster">
                 <h3>Click on item in Queue List to see Poster</h3>
             </div>
 
-            <div id="bottom" class="rating">
+            <div class="bottom rating">
                 <h3>Rating</h3>
             </div>
 
-            <div id="bottom" class="content-info">
+            <div class="bottom content-info">
                 <h3>Movie Info</h3>
             </div>
 
-            <form id="bottom" class="queue-form">
+            <form class="bottom queue-form">
                 <h3>Add To My Queue </h3> 
             </form>
 
             <div class="reviews">
-                <form class="edit-form">
-                    <label for="update-review">Change Your Review:</label><br>
-                    <input type="text" id="contentId" name="contentId" placeholder="ID# of Content"><br>
-                    <input type="text" id="reviewupdate" name="reviewupdate" placeholder="Change Your Review"><br>
-                    <input class="update-button" type="submit" value="Update Review">
-                </form>
+   
                 <h3>Reviews</h3>
                 <ul class="display-reviews"></ul>
                
