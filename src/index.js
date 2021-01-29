@@ -179,17 +179,81 @@ function getQueue(queueArray) {
             titleName.dataset.id = contentObj.id 
             titleName.className = "titleName"
             titleName.innerText = contentObj.title
-            if (contentObj.platform == "Netflix") {
-                let platformImg = document.createElement("img")
-                img.src = NETFLLIX PHOTO
-                SIZE THE FUCKIN PHOTO YEEE
-                
-            }
-            titleName.innerText +=  (" -----" + contentObj.platform)
+             if (contentObj.platform == "Netflix") {
+                 let netflixImg = document.createElement("img")
+                 netflixImg.className ="platformImg"
+                 netflixImg.src = "https://blackandredgister.com/wp-content/uploads/2018/05/Screen-Shot-2018-05-15-at-8-900x600.jpg"
+                 netflixImg.style.maxWidth = "170px"
+                 netflixImg.style.maxHeight= "125px"
+                 titleName.append(netflixImg)
+                queueUl.append(titleName)
+                mainQueue.append(queueUl)
+
+            //     let platformImg = document.createElement("img")
+            //     platformImg.src = "https://toppng.com/uploads/preview/netflix-logo-png-11593869496jqso5gxgsy.png"
+            //     platformImg.style.maxWidth = "50px"
+            //     platformImg.style.maxHeight = "50px"
+            //     titleName.append(platformImg)
+            // }
+            // titleName.innerText +=  (" -----" + contentObj.platform)
+            // queueUl.append(titleName)
+            // mainQueue.append(queueUl)
+        }
+        else if (contentObj.platform == "Prime Video") {
+            let primeImg = document.createElement("img")
+                 primeImg.className = "platformImg"
+                 primeImg.src = "data:image/png;base64,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"
+                 primeImg.style.maxWidth = "170px"
+                 primeImg.style.maxHeight= "125px"
+                 titleName.append(primeImg)
+                queueUl.append(titleName)
+                mainQueue.append(queueUl)
+
+        }
+        else if (contentObj.platform == "HBO Max") {
+            let hboImg = document.createElement("img")
+                hboImg.className = "platformImg"
+                hboImg.src = "https://images.complex.com/complex/images/c_fill,dpr_auto,f_auto,q_90,w_1400/fl_lossy,pg_1/zljbr5prwbm5fgp92fd9/hbo-max-black2"
+                hboImg.style.maxWidth = "170px"
+                hboImg.style.maxHeight= "125px"
+                titleName.append(hboImg)
+                queueUl.append(titleName)
+                mainQueue.append(queueUl)
+        }
+        else if(contentObj.platform == "Crunchyroll") {
+            let crunchyImg = document.createElement("img")
+            crunchyImg.className = "platformImg"
+            crunchyImg.src = "https://basictech.tips/wp-content/uploads/crunchyroll-logo.png"
+            crunchyImg.style.maxWidth = "170px"
+            crunchyImg.style.maxHeight= "125px"
+            titleName.append(crunchyImg)
             queueUl.append(titleName)
             mainQueue.append(queueUl)
+
+        }
+        else if(contentObj.platform == "Hulu") {
+            let huluImg = document.createElement("img")
+            huluImg.className = "platformImg"
+            huluImg.src = "https://assetshuluimcom-a.akamaihd.net/h3o/facebook_share_thumb_default_hulu.jpg"
+            huluImg.style.maxWidth = "170px"
+            huluImg.style.maxHeight= "125x"
+            titleName.append(huluImg)
+            queueUl.append(titleName)
+            mainQueue.append(queueUl)
+        }
+        else if(contentObj.platform =="Disney+") {
+            let disneyImg = document.createElement("img")
+            disneyImg.className = "platformImg"
+            disneyImg.src = "https://r3.whistleout.com.au/public/images/articles/2019/08/disney_plus_logo.jpg"
+            disneyImg.style.maxWidth = "170px"
+            disneyImg.style.maxHeight= "1205x"
+            titleName.append(disneyImg)
+            queueUl.append(titleName)
+            mainQueue.append(queueUl)
+        }
         })
-    }
+}
+
     
 //CLICKING ON MOVIE lis that will call on render helpers
 
@@ -293,11 +357,11 @@ function renderReview(contentId) {
                 reviewLi.dataset.id = ownerObj.id 
                 let deleteButton = document.createElement("button")
                 let editButton = document.createElement("button")
-                let lineBreak = document.createElement("br")
-                deleteButton.innerText = "Delete"
+                // let lineBreak = document.createElement("br")
+                deleteButton.innerText = "Delete this content from your queue"
                 deleteButton.dataset.id = reviewLi.dataset.id 
                 deleteButton.className = "delete"
-                editButton.innerText = "Edit"
+                editButton.innerText = "Edit this review"
                 editButton.dataset.id = reviewLi.dataset.id
                 editButton.className = "edit"
                 reviewLi.append(editButton, deleteButton)
@@ -318,45 +382,64 @@ function updateEvent()  {
         }
     })
 }
+updateEvent()
 
 
 function updateReview (contentId) {
     editForm.innerHTML = ""
+    editForm.dataset.id = contentId
     let label = document.createElement("label")
     label.name = "update-review"
     label.textContent = "Update Your Review"
 
-    let input1 = document.createElement("input")
-    input1.type = "text"
-    input1.name = "review"
-    input1.placeholder = "Update Your Review Here"
+    // let input1 = document.createElement("input")
+    // input1.type = "text"
+    // input1.name = "contentID"
+    // input1.placeholder = "Add the ID# of the Content You want to Edit"
 
     let input2 = document.createElement("input")
-    input2.type = "submit"
-    input2.value = "Submit Update"
+    input2.type = "text"
+    input2.name = "review"
+    input2.id = "review"
+    input2.placeholder = "Update Your Review Here"
+
+    let input3 = document.createElement("input")
+    input3.type = "submit"
+    input3.value = "Submit Update"
     
-    editForm.append(label, input1, input2)
+    editForm.append(label, input2, input3)
 
-    editForm.addEventListener("submit", (e) => {
-        e.preventDefault() 
-        let newReview = e.target.review.value 
-        fetch(`http://localhost:3000/ownerships/${contentId}`, {
-            method: 'PATCH', 
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify( {
-                review: newReview
-            }),
-        })
-        .then(res => res.json())
-        .then(ownerObj => {
-            renderReview(contentId)
-        })
-       e.target.reset()
-
-    })
+    
 }
+
+editForm.addEventListener("submit", (e) => {
+    debugger
+    e.preventDefault() 
+    let id = e.target.dataset.id
+    // console.log(e.target)
+    let newReview = e.target.review.value 
+    // console.log(newReview)
+    fetch(`http://localhost:3000/ownerships/${id}`, {
+        method: 'PATCH', 
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify( {
+            review: newReview
+        }),
+    })
+    .then(res => res.json())
+    .then(data => {
+        console.log(data)
+        renderReview(contentId)
+    })
+   e.target.reset()
+
+})
+
+//updateReview()
+
+  
 
 //DELETE STUFF
 
@@ -413,7 +496,6 @@ function addToQueue() {
 
 addToQueue()
 
-
 addQueueForm.addEventListener("submit", (e) => {
     e.preventDefault() 
 
@@ -440,7 +522,7 @@ addQueueForm.addEventListener("submit", (e) => {
     e.target.reset()
 } ) 
 
-updateEvent()
+
 delEvent()
 
 

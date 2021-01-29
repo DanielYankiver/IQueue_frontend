@@ -1,22 +1,24 @@
 #sexy-body {
   font-family: Tahoma;
   font-weight: bold;
+  background-image: url("https://www.rokuguide.com/sites/default/files/styles/juicebox_medium/public/rew.jpg?itok=frf4qcap");
+  background-size: 1500px 1000px, cover;;
 }
 
 #top {
-  background-color: rgb(37, 37, 37);
+  /* background-color: rgb(37, 37, 37); */
   color: rgb(255, 0, 255);
 
 }
 
 #middle {
-  background-color: rgb(63, 29, 63);
+  /* background-color: rgb(63, 29, 63); */
 
 }
 
 #bottom {
-  background-image: linear-gradient(to right, aqua, yellow);
-  color: rgb(0, 0, 0);
+  /* background-image: linear-gradient(to right, aqua, yellow); */
+  color: rgb(255, 255, 255);
 
 }
 
@@ -72,9 +74,8 @@
   width: 800px;
   height: 275px;
   /* margin:0px auto; */
-  background-color: rgb(63, 29, 63);
+  background-color: rgb(0, 0, 0);
   overflow-y:hidden;
-
 
   }
 
@@ -96,11 +97,9 @@
   display:inline;       
   }
 
-.carousel {
 
+.bottom { grid-area: 3 / 1 / 6 / 5; 
 }
-
-.bottom { grid-area: 3 / 1 / 6 / 5; }
 
 
 .queue-display { 
@@ -109,19 +108,36 @@
   align-content: center; */
   padding-left: 5px;
   padding-right: 60px; 
+  max-height: 800px;
+  overflow: auto;
+ 
 }
 
 .myQueue { 
   display: flex;
   justify-content: center;
   font-size: 24px;
+  padding-top: 65px;
+  
 }
+
+
 
 .queue-display p {
   padding-top: 10px;
   /* padding-bottom: 10px; 
   padding-left: -25px;  */
   border-style: solid;
+  /* width: 800px;
+  height: 275px;
+  overflow-x:hidden; */
+
+}
+
+
+.queue-display .platformImg {
+  display: flex;
+  justify-content: center;
 
 }
 
@@ -150,6 +166,7 @@
   justify-content: center; 
   align-items: center; 
   font-size: 30px;
+
 }
 
 
@@ -171,8 +188,24 @@
 }
 
 
-.queue-form { grid-area: 3 / 4 / 4 / 5; }
-.reviews { grid-area: 4 / 4 / 6 / 5; }
+.queue-form { 
+  grid-area: 3 / 4 / 4 / 5; 
+
+  padding-top: 100px;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+
+
+
+.reviews { 
+  grid-area: 4 / 4 / 6 / 5; 
+  padding-top: 100px;
+  padding-left: 50px;
+  padding-right: 50px;
+
+}
 
 
 
