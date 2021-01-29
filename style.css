@@ -74,6 +74,7 @@ button {
   border-width: 3px;
   text-align: center;
   cursor: pointer;
+  margin: auto;
 
   display: flex;
   align-items: baseline; 
@@ -96,6 +97,21 @@ button {
 
 }
 
+.update-button { 
+  color: rgb(247, 228, 228);
+  background-color: rgb(165, 0, 0);
+  font-weight: bold;
+  border-radius: 10px;
+  border-color: rgba(150, 131, 131, 0.425);
+  border-style: groove;
+  border-width: 3px;
+  text-align: center;
+  cursor: pointer;
+
+  display: flex;
+  align-items: baseline; 
+
+}
 
 /* MOVIE BROWSE AREA */
 
@@ -238,18 +254,24 @@ button {
 }
 
 
-
-
 .reviews { 
-  grid-area: 4 / 4 / 6 / 5;
+  grid-area: 2 / 4 / 3 / 5; 
   
-  justify-content: center; 
-  align-items: center; 
-  padding-top: 100px;
-  padding-left: 50px;
-  padding-right: 50px;
+  justify-content: right; 
+  align-items: right; 
+  /* padding-top: 100px; */
+  margin: auto;
+  padding-left: 90px;
+  /* padding-right: 50px; */
+
+  color: rgb(247, 228, 228);
 
 }
+
+.reviews p {
+  font-size: 10px;
+}
+
 
 
 

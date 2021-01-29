@@ -31,6 +31,9 @@
                 </form>
             </div>
         </div>
+
+           
+
         
         
         <div id="middle" class="queue-list">
@@ -88,10 +91,16 @@
                 <h3>Add To My Queue </h3> 
             </form>
 
-            <div id="bottom" class="reviews">
+            <div class="reviews">
+                <form class="edit-form">
+                    <label for="update-review">Change Your Review:</label><br>
+                    <input type="text" id="contentId" name="contentId" placeholder="ID# of Content"><br>
+                    <input type="text" id="reviewupdate" name="reviewupdate" placeholder="Change Your Review"><br>
+                    <input class="update-button" type="submit" value="Update Review">
+                </form>
                 <h3>Reviews</h3>
                 <ul class="display-reviews"></ul>
-                <form class="edit-form"></form>
+               
                 <br>
             </div>
         

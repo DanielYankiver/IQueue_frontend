@@ -127,6 +127,57 @@ function renderBrowseMovies(){
 
 renderBrowseMovies()
 
+let editForm = document.querySelector(".edit-form")
+editForm.addEventListener("submit", (e) => {
+    e.preventDefault()
+   
+    let editButton = document.querySelector(".update-button")
+    if(editButton.value == "Update Review") {
+        let newContentId = parseInt((e.target.contentId.value))
+        let newReview = (e.target.reviewupdate.value)
+        let newReviewObj = {
+            id: newContentId,
+            review: newReview
+        }
+        fetch(`http://localhost:3000/ownerships/${newContentId}`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(newReviewObj)
+        })
+        .then( res => res.json())
+        .then( data => {
+            console.log(data)
+            //renderReview(newContentId)
+        })
+        e.target.reset()
+    }
+})
+
+// editForm.addEventListener("submit", (e) => {
+//     debugger
+//     e.preventDefault() 
+//     let id = e.target.dataset.id
+//     // console.log(e.target)
+//     let newReview = e.target.review.value 
+//     // console.log(newReview)
+//     fetch(`http://localhost:3000/ownerships/${id}`, {
+//         method: 'PATCH', 
+//         headers: {
+//           'Content-Type': 'application/json',
+//         },
+//         body: JSON.stringify( {
+//             review: newReview
+//         }),
+//     })
+//     .then(res => res.json())
+//     .then(data => {
+//         console.log(data)
+//         renderReview(contentId)
+//     })
+//    e.target.reset()
+
 //****** Sign In ******//
 
 
@@ -352,19 +403,19 @@ function renderReview(contentId) {
         myOwnerships.forEach(ownerObj => {
             if(ownerObj.content_id == contentId) {
                 myReviews.push(ownerObj)
-                let reviewLi = document.createElement("li")
+                let reviewLi = document.createElement("p")
                 reviewLi.innerText = ownerObj.review
                 reviewLi.dataset.id = ownerObj.id 
                 let deleteButton = document.createElement("button")
-                let editButton = document.createElement("button")
+                //let editButton = document.createElement("button")
                 // let lineBreak = document.createElement("br")
                 deleteButton.innerText = "Delete this content from your queue"
                 deleteButton.dataset.id = reviewLi.dataset.id 
                 deleteButton.className = "delete"
-                editButton.innerText = "Edit this review"
-                editButton.dataset.id = reviewLi.dataset.id
-                editButton.className = "edit"
-                reviewLi.append(editButton, deleteButton)
+                //editButton.innerText = "Edit this review"
+                //editButton.dataset.id = reviewLi.dataset.id
+                //editButton.className = "edit"
+                reviewLi.append(deleteButton)
                 reviewUl.append(reviewLi)
              }
         })
@@ -373,69 +424,69 @@ function renderReview(contentId) {
 
 //PATCH STUFF, this is cool bc we generate a form on edit click
 
-let editForm = document.querySelector(".edit-form")
+//let editForm = document.querySelector(".edit-form")
 
-function updateEvent()  {
-    reviewDiv.addEventListener("click", (e) => {
-        if (e.target.className == "edit") {
-            updateReview(e.target.dataset.id)
-        }
-    })
-}
-updateEvent()
+// function updateEvent()  {
+//     reviewDiv.addEventListener("click", (e) => {
+//         if (e.target.className == "edit") {
+//             updateReview(e.target.dataset.id)
+//         }
+//     })
+// }
+// updateEvent()
 
 
-function updateReview (contentId) {
-    editForm.innerHTML = ""
-    editForm.dataset.id = contentId
-    let label = document.createElement("label")
-    label.name = "update-review"
-    label.textContent = "Update Your Review"
+// function updateReview (contentId) {
+//     editForm.innerHTML = ""
+//     editForm.dataset.id = contentId
+//     let label = document.createElement("label")
+//     label.name = "update-review"
+//     label.textContent = "Update Your Review"
 
-    // let input1 = document.createElement("input")
-    // input1.type = "text"
-    // input1.name = "contentID"
-    // input1.placeholder = "Add the ID# of the Content You want to Edit"
+//     // let input1 = document.createElement("input")
+//     // input1.type = "text"
+//     // input1.name = "contentID"
+//     // input1.placeholder = "Add the ID# of the Content You want to Edit"
 
-    let input2 = document.createElement("input")
-    input2.type = "text"
-    input2.name = "review"
-    input2.id = "review"
-    input2.placeholder = "Update Your Review Here"
+//     let input2 = document.createElement("input")
+//     input2.type = "text"
+//     input2.name = "review"
+//     input2.id = "review"
+//     input2.placeholder = "Update Your Review Here"
 
-    let input3 = document.createElement("input")
-    input3.type = "submit"
-    input3.value = "Submit Update"
+//     let input3 = document.createElement("input")
+//     input3.type = "submit"
+//     input3.value = "Submit Update"
     
-    editForm.append(label, input2, input3)
+//     editForm.append(label, input2, input3)
 
     
-}
+// }
 
-editForm.addEventListener("submit", (e) => {
-    debugger
-    e.preventDefault() 
-    let id = e.target.dataset.id
-    // console.log(e.target)
-    let newReview = e.target.review.value 
-    // console.log(newReview)
-    fetch(`http://localhost:3000/ownerships/${id}`, {
-        method: 'PATCH', 
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify( {
-            review: newReview
-        }),
-    })
-    .then(res => res.json())
-    .then(data => {
-        console.log(data)
-        renderReview(contentId)
-    })
-   e.target.reset()
+// editForm.addEventListener("submit", (e) => {
+//     debugger
+//     e.preventDefault() 
+//     let id = e.target.dataset.id
+//     // console.log(e.target)
+//     let newReview = e.target.review.value 
+//     // console.log(newReview)
+//     fetch(`http://localhost:3000/ownerships/${id}`, {
+//         method: 'PATCH', 
+//         headers: {
+//           'Content-Type': 'application/json',
+//         },
+//         body: JSON.stringify( {
+//             review: newReview
+//         }),
+//     })
+//     .then(res => res.json())
+//     .then(data => {
+//         console.log(data)
+//         renderReview(contentId)
+//     })
+//    e.target.reset()
 
-})
+// })
 
 //updateReview()
 
