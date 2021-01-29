@@ -1,13 +1,13 @@
 #sexy-body {
   font-family: Tahoma;
   font-weight: bold;
-  background-image: url("https://www.rokuguide.com/sites/default/files/styles/juicebox_medium/public/rew.jpg?itok=frf4qcap");
-  background-size: 1500px 1000px, cover;;
+  background-image: url("https://media.istockphoto.com/videos/red-curtains-opening-with-wooden-floor-video-id521778707?s=640x640");
+  background-size: 1500px 1300px, cover;;
 }
 
 #top {
   /* background-color: rgb(37, 37, 37); */
-  color: rgb(255, 0, 255);
+  color: rgb(185, 1, 1);
 
 }
 
@@ -18,7 +18,7 @@
 
 #bottom {
   /* background-image: linear-gradient(to right, aqua, yellow); */
-  color: rgb(255, 255, 255);
+  color: rgb(247, 228, 228);;
 
 }
 
@@ -32,14 +32,29 @@
 
 .logo { grid-area: 1 / 1 / 2 / 2; }
 
-
-.click-to-see-id { 
-  grid-area: 1 / 2 / 2 / 4; 
-
+.logo-iQ {
+  font-family: Georgia;
+  font-size: 28px;
+  color: white;
+  text-shadow: 3px 3px #FF0000;
+  text-align:center;
 }
 
 
-.sign-in-div { grid-area: 1 / 4 / 2 / 5; }
+.click-to-see-id { 
+  grid-area: 1 / 2 / 2 / 4; 
+  margin: auto;
+  font-size: 22px;
+  padding-top: 50px;
+}
+
+
+.sign-in-div { 
+  grid-area: 1 / 4 / 2 / 5; 
+  margin: auto;
+  font-size: 16px;
+  padding-top: 20px;
+}
 
 /* QUEUE BUTTONS  */
 
@@ -49,12 +64,28 @@
 
 } */
 
-#queue-buttons {
-  color: rgb(48, 48, 48);
-  background-color: rgb(255, 0, 255);
+button {
+  color: rgb(247, 228, 228);
+  background-color: rgb(165, 0, 0);
   font-weight: bold;
   border-radius: 10px;
-  border-color: black;
+  border-color: rgba(0, 0, 0, 0.425);
+  border-style: groove;
+  border-width: 3px;
+  text-align: center;
+  cursor: pointer;
+
+  display: flex;
+  align-items: baseline; 
+
+}
+
+.login-button { 
+  color: rgb(247, 228, 228);
+  background-color: rgb(165, 0, 0);
+  font-weight: bold;
+  border-radius: 10px;
+  border-color: rgba(150, 131, 131, 0.425);
   border-style: groove;
   border-width: 3px;
   text-align: center;
@@ -78,6 +109,9 @@
   overflow-y:hidden;
 
   }
+  .movie-browse-card:hover { 
+    transform: scale(1.1)
+  }
 
 .movie-browse-card ul {
   float:left;
@@ -89,6 +123,7 @@
   justify-content: flex-start; 
   /* flex-direction: row-reverse; */
   }
+
 
 .movie-browse-card li {
   margin:15px;
@@ -127,7 +162,10 @@
   padding-top: 10px;
   /* padding-bottom: 10px; 
   padding-left: -25px;  */
-  border-style: solid;
+  border-style: outset;
+  border-width: 5px;
+  border-color: rgb(247, 228, 228);
+  text-align: center;
   /* width: 800px;
   height: 275px;
   overflow-x:hidden; */
@@ -140,8 +178,6 @@
   justify-content: center;
 
 }
-
-
 
 
 
@@ -160,6 +196,11 @@
   height: 500px;
 }
 
+.poster:hover {
+  transform: scale(1.03);
+  box-shadow: 0px 3px 8px 2px rgba(255,255,255,1)
+}
+
 .rating { 
   grid-area: 5 / 2 / 6 / 3; 
   display: flex;
@@ -168,7 +209,6 @@
   font-size: 30px;
 
 }
-
 
 
 .content-info { 
@@ -191,16 +231,20 @@
 .queue-form { 
   grid-area: 3 / 4 / 4 / 5; 
 
-  padding-top: 100px;
+  padding-top: 150px;
   padding-left: 50px;
   padding-right: 50px;
+  font-size: 30px;
 }
 
 
 
 
 .reviews { 
-  grid-area: 4 / 4 / 6 / 5; 
+  grid-area: 4 / 4 / 6 / 5;
+  
+  justify-content: center; 
+  align-items: center; 
   padding-top: 100px;
   padding-left: 50px;
   padding-right: 50px;
